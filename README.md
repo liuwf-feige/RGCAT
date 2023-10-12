@@ -20,6 +20,7 @@ Run it without any parameter `perl RGCAT.pl`, it will print usage on the screen.
 
 This program calls minimap2 to do alignment between query and target/reference assemblies. To filter misalignment, the program does both of query-to-target and target-to-query alignments, filters secondary alignments, and only keeps alignments overlapped in both of query-to-target and target-to-query alignments. Moreover, the query sequence file, query gff file, and contig prefix of query should be in the same order. In default, The program will create a subdir inside outdir and generate chain, vcf and bed files for both of query-to-target and target-to-query alignments. To achieve a better vcf transfromation in liftvcf, we used chain and vcf files for both of query-to-target and target-to-query alignments.
 
+
 1. Commands
    > --command|-c
    
@@ -32,6 +33,7 @@ This program calls minimap2 to do alignment between query and target/reference a
    Use parameter `--command liftgff` to lift gff file based on chain file.
 
    Use parameter `--command liftvcf` to lift vcf file based on chain file.
+
 
 2. Input files
 
@@ -48,15 +50,18 @@ This program needs several necessary input files for all tasks.
 
    Use parameter `--outdir out_directory` to assign output directory.
 
+
 The task `--command liftgff` need genome annotation file in GFF format.
    > --ingff|-ig
 
    Use parameter `--ingff input.gff` to assign GFF file which needs to be transformed.
    
+
 The task `--command liftvcf` need variant file in VCF format.
    > --invcf|-iv
 
    Use parameter `--invcf input.vcf` to assign VCF file which needs to be transformed.
+
 
 The task `--command gencmp` or `--command pangen` can provide genome annotation file for annotation comparison using the following parameters.
    > --refgff|-rf
@@ -66,6 +71,7 @@ The task `--command gencmp` or `--command pangen` can provide genome annotation 
    > --quegff|-qf
 
    Use parameter `--quegff query.gff` to assign a query GFF file or `--quegff query_gff_list_file` to assign a file for all query GFF files (each line is a name of query GFF file).
+
 
 3. Output files
 
@@ -81,8 +87,8 @@ This program produces several output files in regular format.
 
 4. Detail parameters
 
-        Usage: perl RGCAT_v1.pl --command|-c <command> [options]
-	The following options are necessary.
+        Usage: perl RGCAT.pl --command|-c <command> [options]
+        The following options are necessary.
         --command|-c <command>: a command for different tasks.
                 The details about each task was explained bellow.
                 gencmp      compare between query and target/reference genome assemblies
