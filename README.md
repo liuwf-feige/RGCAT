@@ -88,6 +88,7 @@ This program produces several output files in regular format.
 4. Detail parameters
 
         Usage: perl RGCAT.pl --command|-c <command> [options]
+
         The following options are necessary.
         --command|-c <command>: a command for different tasks.
                 The details about each task was explained bellow.
