@@ -16,7 +16,7 @@ This program doesn't need install. You can run it using absolute path. It has be
 
 ## Usage
 
-Run it without any parameter, it will print usage on the screen. You can also use help command `pmprimer --help|-h` to show usage message.
+Run it without any parameter `perl RGCAT.pl`, it will print usage on the screen. You can also use help command `perl RGCAT.pl --help|-h` to show usage message.
 
 This program calls minimap2 to do alignment between query and target/reference assemblies. To filter misalignment, the program does both of query-to-target and target-to-query alignments, filters secondary alignments, and only keeps alignments overlapped in both of query-to-target and target-to-query alignments. Moreover, the query sequence file, query gff file, and contig prefix of query should be in the same order. In default, The program will create a subdir inside outdir and generate chain, vcf and bed files for both of query-to-target and target-to-query alignments. To achieve a better vcf transfromation in liftvcf, we used chain and vcf files for both of query-to-target and target-to-query alignments.
 
@@ -37,27 +37,34 @@ This program calls minimap2 to do alignment between query and target/reference a
 
 This program needs several necessary input files for all tasks.
    > --refseq|-rs
+
    Use parameter `--refseq referenece.fasta` to assign a reference/target sequence file in fasta format.
 
    > --queseq|-qs
+
    Use parameter `--queseq query.fasta` to assign a query sequence file in fasta format or `--queseq query_sequence_list_file` to assign a file for all query sequence files (each line is a name of query sequence file).
 
    > --outdir|-o
+
    Use parameter `--outdir out_directory` to assign output directory.
 
 The task `--command liftgff` need genome annotation file in GFF format.
    > --ingff|-ig
+
    Use parameter `--ingff input.gff` to assign GFF file which needs to be transformed.
    
 The task `--command liftvcf` need variant file in VCF format.
    > --invcf|-iv
+
    Use parameter `--invcf input.vcf` to assign VCF file which needs to be transformed.
 
 The task `--command gencmp` or `--command pangen` can provide genome annotation file for annotation comparison using the following parameters.
    > --refgff|-rf
+
    Use parameter `--refgff referenece.gff` to assign a reference/target GFF file.
 
    > --quegff|-qf
+
    Use parameter `--quegff query.gff` to assign a query GFF file or `--quegff query_gff_list_file` to assign a file for all query GFF files (each line is a name of query GFF file).
 
 3. Output files
@@ -74,7 +81,8 @@ This program produces several output files in regular format.
 
 4. Detail parameters
 
-        The following options are necessary.
+        Usage: perl RGCAT_v1.pl --command|-c <command> [options]
+	The following options are necessary.
         --command|-c <command>: a command for different tasks.
                 The details about each task was explained bellow.
                 gencmp      compare between query and target/reference genome assemblies
@@ -124,12 +132,14 @@ This program produces several output files in regular format.
 
    Example commands:
    > `perl RGCAT_v1.pl -c gencmp -rs <reference.fa> -qs <query.fa> -o <output_dir>`
+
    > `perl RGCAT_v1.pl -c gencmp -rs <reference.fa> -qs <query.fa> -rf <reference.gff> -qf <query.gff> -o <output_dir>`
 
 2. For pangen command, this program takes one reference assembly and several query assemblies as input and produces pan-genome gradually with query genome added one by one. The final pan-genome sequence in FASTA format and annotation in GFF format will be created in the last produced subdiretory in side output directory.
 
    Example commands:
    > `perl RGCAT_v1.pl -c pangen -rs <reference.fa> -qs <listfile_of_query.fa> -cp <list_file_of_contig_prefix> -o <output_dir>`
+
    > `perl RGCAT_v1.pl -c pangen -rs <reference.fa> -qs <listfile_of_query.fa> -rf <reference.gff> -qf <query.gff> -cp <list_file_of_contig_prefix> -o <output_dir>`
 
 3. For vcf transformation, this program will produce tranformed output vcf and failed vcf files. Important: vcf file should be sorted before running liftvcf.
@@ -145,6 +155,4 @@ This program produces several output files in regular format.
 
 ## Contact
 
-If you have any question or suggestion, please contact us.
-Wanfei Liu
-Email: <liuwanfei@caas.cn>
+If you have any question or suggestion, please contact Wanfei Liu. Email: <liuwanfei@caas.cn>
